@@ -1,0 +1,90 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    BILL
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container d-flex justify-content-center">
+        <div class="billing-container glass-card">
+            <h3 class="text-center text-warning">Send Notification</h3>
+            
+            <form action="{{ url_for('send_notification')}}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
+                
+                <div class="mb-3">
+                    <input type="text" name="message" class="form-control" placeholder="Type your notification..." required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Send</button>
+            </form>
+            <form action="{{url_for('clear_alerts')}}" method="POST" style="display: inline;">
+                <div class="container d-flex justify-content-center" style="margin-top: 15px;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Clear all alerts</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    body {
+        background: linear-gradient(to right, rgba(0, 0, 50, 0.8), rgba(50, 0, 50, 0.8));
+        color: white;
+    }
+    
+    .billing-container {
+        width: 90%;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.2);
+        margin-top: 50px;
+        color: white;
+    }
+
+    .glass-card {
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .form-control, .form-select {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .form-select option {
+        background: rgba(0, 0, 50, 0.9);
+        color: white;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 768px) {
+        .billing-container {
+            width: 80%;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .billing-container {
+            width: 100%;
+            padding: 20px;
+        }
+    }
+</style>
+
+{% endblock %}

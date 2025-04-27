@@ -1,0 +1,67 @@
+<!-- DELETE Modal -->
+<div class="modal fade" id="exampleModal-delete-{{ user.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content custom-modal">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel"><strong>Reject</strong></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>Do you want to reject <strong>{{ user.username }} </strong>as a staff member?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              <form action="{{ url_for('delete_user', id=user.id) }}" method="POST" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-success btn-sm">Confirm</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- APPROVE Modal -->
+<div class="modal fade" id="exampleModal-approve-{{ user.id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content custom-modal">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5 text-success" id="exampleModalLabel"><strong>Approve</strong></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>Do you want to approve <strong>{{ user.username }} </strong>as a staff member?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              <form action="{{ url_for('create_user', id=user.id) }}" method="POST" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-success btn-sm">Approve</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<style>
+
+  .custom-modal {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.2));
+      color: white;
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .modal-header h1 {
+      color: white;
+  }
+
+  .modal-body p {
+      color: white;
+  }
+
+  .modal-footer .btn {
+      border-radius: 5px;
+  }
+</style>

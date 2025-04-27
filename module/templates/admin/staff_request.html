@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% block title %}Stock-Data{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h3 class="text-center text-light fw-bold mb-4">User Management</h3>
+        <div class="table-responsive glass-table p-3">
+            <table class="table table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-light">
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="text-uppercase">{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal-approve-{{ user.id }}">
+                                <i class="bi bi-check-circle"></i> Approve
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal-delete-{{ user.id }}">
+                                <i class="bi bi-x-circle"></i> Reject
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% for user in users %}
+    {% include 'includes/modal.html' %}
+{% endfor %}
+
+<style>  
+    body {
+        background: linear-gradient(to right, rgba(0, 0, 50, 0.8), rgba(50, 0, 50, 0.8));
+        color: white;
+    }
+
+    .glass-table {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .table-hover tbody tr:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-success, .btn-danger {
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
+    }
+    .btn-success:hover {
+        background: #218838;
+    }
+    .btn-danger:hover {
+        background: #c82333;
+    }
+
+    @media (max-width: 768px) {
+        .glass-table {
+            box-shadow: none;
+        }
+    }
+</style>
+{% endblock %}

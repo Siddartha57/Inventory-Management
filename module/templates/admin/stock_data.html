@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% block title %}Stock-Data{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-light">Manage Items</h2>
+            <button type="button" class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#addItemsModal">
+                <i class="bi bi-plus-circle"></i> Add Item
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-blur rounded overflow-hidden">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Added Time</th>
+                        <th>Updated Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items|sort(attribute="name") %}
+                    {% include 'includes/stock_data_modal.html' %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="text-uppercase">{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹ {{ item.price }}</td>
+                        <td>{{ item.added_date.strftime('%m-%d-%Y') }} <br> {{ item.added_date.strftime('%H:%M') }}</td>
+                        <td>{{ item.updated_date.strftime('%m-%d-%Y') }} <br> {{ item.updated_date.strftime('%H:%M') }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<style>
+
+    body{
+        background: url('/static/images/ad_home_bg.webp');
+    }
+    .table-blur {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-blur th, .table-blur td {
+        color: #fff !important;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .table-blur tbody tr:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-success {
+        background: linear-gradient(45deg, #28a745, #218838);
+        border: none;
+    }
+    .btn-success:hover {
+        background: linear-gradient(45deg, #218838, #1e7e34);
+    }
+</style>
+{% endblock %}

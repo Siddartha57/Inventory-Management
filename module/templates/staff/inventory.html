@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% block title %}
+Inventory
+{% endblock %}
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <h3 class="text-center text-light fw-bold mb-4">Inventory</h3>
+        <div class="table-responsive rounded shadow-sm p-3 bg-dark">
+            <table class="table table-hover text-center align-middle text-light table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>S.no</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th class="d-none d-md-table-cell">Added Time</th>
+                        <th class="d-none d-md-table-cell">Updated Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items|sort(attribute="name") %}
+                    {% include 'includes/product_modal.html' %}
+                    {% include 'includes/stock_data_modal.html' %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="text-uppercase">{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹ {{ item.price }}</td>
+                        <td class="d-none d-md-table-cell">{{ item.added_date.strftime('%m-%d-%Y') }} - {{ item.added_date.strftime('%H:%M') }}</td>
+                        <td class="d-none d-md-table-cell">{{ item.updated_date.strftime('%m-%d-%Y') }} - {{ item.updated_date.strftime('%H:%M') }}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#update-item-modal-{{item.id}}">
+                                <i class="bi bi-pencil-square me-1"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{item.id}}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</section>
+
+<style>  
+    body {
+        background: linear-gradient(to right, rgba(50, 50, 100, 0.8), rgba(30, 30, 80, 0.8));
+        color: white;
+    }
+
+    .table-responsive {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .table-hover tbody tr:hover {
+        background: rgba(255, 255, 255, 0.5) !important;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-warning {
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn-warning:hover {
+        background: #d39e00;
+    }
+
+    @media (max-width: 992px) {
+        .table {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .table {
+            font-size: 12px;
+        }
+        .btn-warning {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .table {
+            font-size: 11px;
+        }
+        .btn-warning {
+            font-size: 12px;
+            padding: 6px 12px;
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

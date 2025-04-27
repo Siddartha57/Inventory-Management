@@ -1,0 +1,120 @@
+{% extends 'index.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <h3 class="text-center text-light fw-bold mb-4 text-uppercase">Admin</h3>
+
+        <div class="row g-4 justify-content-center"> 
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Check Applications</h5>
+                    <p>Click Below</p>
+                    <a href="{{ url_for('dash_page') }}" class="btn btn-primary btn-sm w-100">Application</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Stock Data</h5>
+                    <p>Manage your products</p>
+                    <a href="{{ url_for('stock_list_page') }}" class="btn btn-primary btn-sm w-100">Stock</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Staff</h5>
+                    <p>Check Your Staff Details</p>
+                    <a href="{{ url_for('staff_list_page') }}" class="btn btn-primary btn-sm w-100">Staff</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center mt-2">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Reports</h5>
+                    <p>Check Reports</p>
+                    <a href="{{ url_for('stock_reports_page') }}" class="btn btn-primary btn-sm w-100">Reports</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Notifications</h5>
+                    <p>Send Notifications</p>
+                    <a href="{{ url_for('send_alert_page') }}" class="btn btn-primary btn-sm w-100">Click</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="dashboard-card glass-card">
+                    <h5>Logout</h5>
+                    <p>Securely exit your session.</p>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm w-100">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    body {
+        background: url('/static/images/ad_home_bg.webp') center center/cover no-repeat;
+        background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: darken;
+        position: relative;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .glass-card {
+            padding: 15px;
+        }
+        .dashboard-card h5 {
+            font-size: 18px;
+        }
+        .dashboard-card p {
+            font-size: 14px;
+        }
+        body {
+            background: linear-gradient(to right, rgba(0, 30, 80, 0.8), rgba(50, 20, 80, 0.8));
+            color: white;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .glass-card {
+            padding: 12px;
+        }
+        .dashboard-card h5 {
+            font-size: 16px;
+        }
+        .dashboard-card p {
+            font-size: 13px;
+        }
+        body {
+            background: linear-gradient(to right, rgba(0, 30, 80, 0.8), rgba(50, 20, 80, 0.8));
+            color: white;
+        }
+    }
+</style>
+
+{% endblock %}

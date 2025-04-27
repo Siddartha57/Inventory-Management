@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="profile-card glass-card text-center p-4">
+        <img src="{{ url_for('static',filename='images/st_profile.png') }}" alt="Profile Picture" class="profile-img mb-3">
+        <h4 class="fw-bold text-white text-uppercase"> {{ current_user.username }} </h4>
+        <p class="text-light text-uppercase"> {{ current_user.role }} </p>
+        <p class="text-white"><strong>Email:</strong> {{ current_user.email }} </p>
+        <a class="btn btn-danger btn-lg mt-3 w-100" href="{{ url_for('st_dash_page') }}">Back</a>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(to right, rgba(0, 50, 100, 0.6), rgba(50, 100, 150, 0.6));
+        color: white;
+    }
+    
+    .profile-card {
+        max-width: 400px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    @media (max-width: 576px) {
+        .profile-card {
+            padding: 2rem;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+</style>
+{% endblock %}
